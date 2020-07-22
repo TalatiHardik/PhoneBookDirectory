@@ -1,5 +1,6 @@
 package Person;
 
+import java.io.*;
 import java.util.*;
 
 public class PhoneBook {
@@ -46,17 +47,43 @@ public class PhoneBook {
 		}
 		return data;
 	}
+	
+	public void readFile() {
+		try{
+		    FileInputStream readData = new FileInputStream("peopledata.ser");
+		    ObjectInputStream readStream = new ObjectInputStream(readData);
+
+		    PhoneBooklist = (LinkedList<PersonData>) readStream.readObject();
+		    readStream.close();
+		    System.out.println("File read"+PhoneBooklist.get(1));
+		}catch (Exception e) {
+		    e.printStackTrace();
+		}
+	}
+	
+	public void writeFile() {
+		try{
+		    FileOutputStream writeData = new FileOutputStream("peopledata.ser");
+		    ObjectOutputStream writeStream = new ObjectOutputStream(writeData);
+	
+		    writeStream.writeObject(PhoneBooklist);
+		    writeStream.flush();
+		    writeStream.close();
+	
+		}catch (IOException e) {
+		    e.printStackTrace();
+		}
+	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		PhoneBook pb = new PhoneBook();
 		pb.addPerson("Hardik", "lastName", "address", "city", "state", 984701, 12547707);
-		pb.addPerson("Hardik1", "1lastName", "address", "city", "state", 984701, 12547707);
+		pb.addPerson("Hardik21", "lastName", "address", "city", "state", 984701, 12547707);
 		System.out.println("Output:"+pb.getAllPerson());
-		String abc="Hardik1";
+		/*String abc="Hardik1";
 		PersonData s123 = null;
 		s123=pb.searchPerson(abc);	
-		System.out.println("Output:"+s123);
-
+		System.out.println("Output:"+s123);*/
 	}
 
 }

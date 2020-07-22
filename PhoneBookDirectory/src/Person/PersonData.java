@@ -1,6 +1,8 @@
 package Person;
 
-public class PersonData {
+import java.io.Serializable;
+
+public class PersonData implements Serializable {
 	
 	String firstName,lastName,address,city,state;
 	int zip,phoneNumber;
