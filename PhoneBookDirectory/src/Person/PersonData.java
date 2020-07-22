@@ -71,7 +71,7 @@ public class PersonData {
 
 	   public String toString()
 	   {
-	      return  firstName + ":" + lastName + ":" + address + ":" + city + ":" + state + ":" + zip + ":" + phoneNumber;
+	      return  firstName + "\n" + lastName + "\n" + address + "\n" + city + "\n" + state + "\n" + zip + "\n" + phoneNumber;
 	   }
 
 }

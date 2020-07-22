@@ -26,16 +26,16 @@ public class PhoneBook {
 		}
 	}
 
-	public String searchPerson(String firstName) {
-		String data="";
+	public PersonData searchPerson(String firstName) {
+		PersonData searchPerson = null ;
 		for (int i=0 ;i< PhoneBooklist.size();i++) {
 			PersonData person = PhoneBooklist.get(i);
 			if(person.getFirstName().equals(firstName)) {
-				data=person.toString();	
+				searchPerson=person;
 			}
 			
 		}
-		return data;
+		return searchPerson;
 	}
 	
 	public String getAllPerson() {
@@ -53,8 +53,9 @@ public class PhoneBook {
 		pb.addPerson("Hardik1", "1lastName", "address", "city", "state", 984701, 12547707);
 		System.out.println("Output:"+pb.getAllPerson());
 		String abc="Hardik1";
-		abc=pb.searchPerson(abc);
-		System.out.println("Output:"+abc);
+		PersonData s123 = null;
+		s123=pb.searchPerson(abc);	
+		System.out.println("Output:"+s123);
 
 	}
 
