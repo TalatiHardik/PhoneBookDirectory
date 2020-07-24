@@ -17,6 +17,8 @@ import java.util.*;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class AddressBook {
 
@@ -69,6 +71,8 @@ public class AddressBook {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		pb.readFile();
+		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 626, 546);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -128,6 +132,18 @@ public class AddressBook {
 		frame.getContentPane().add(lblNewLabel_6);
 		
 		textField_4 = new JTextField();
+		textField_4.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				int key=e.getKeyCode();
+				if((key>=e.VK_0 && key<=e.VK_9) || (key>=e.VK_NUMPAD0 && key<=e.VK_NUMPAD9) || (key == KeyEvent.VK_BACK_SPACE)) {
+					textField_4.setEditable(true);
+				}
+				else {
+					textField_4.setEditable(false);
+				}
+			}
+		});
 		textField_4.setBounds(125, 253, 121, 20);
 		frame.getContentPane().add(textField_4);
 		textField_4.setColumns(10);
@@ -137,6 +153,18 @@ public class AddressBook {
 		frame.getContentPane().add(lblNewLabel_7);
 		
 		textField_5 = new JTextField();
+		textField_5.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				int key=e.getKeyCode();
+				if((key>=e.VK_0 && key<=e.VK_9) || (key>=e.VK_NUMPAD0 && key<=e.VK_NUMPAD9) || (key == KeyEvent.VK_BACK_SPACE)) {
+					textField_4.setEditable(true);
+				}
+				else {
+					textField_4.setEditable(false);
+				}
+			}
+		});
 		textField_5.setBounds(125, 296, 121, 20);
 		frame.getContentPane().add(textField_5);
 		textField_5.setColumns(10);
@@ -155,7 +183,7 @@ public class AddressBook {
 					int phoneNumber =  Integer.parseInt(textField_5.getText());
 					int success=pb.addPerson(firstName, lastName, address, city, state, zip, phoneNumber);
 					if(success == 0){
-						JOptionPane.showMessageDialog(null,"Error Field not inserted");
+						JOptionPane.showMessageDialog(null,"Error Field not inserted person already exsist");
 					}
 					else {
 						JOptionPane.showMessageDialog(null,"Insertion Successfull");
@@ -171,6 +199,41 @@ public class AddressBook {
 		frame.getContentPane().add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Search");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String firstName=textField.getText();
+				PersonData searchPerson = null;
+				
+				if(textField.getText().equals(""))
+				{
+					JOptionPane.showMessageDialog(null,"Please enter name to search.");
+				
+				}
+				else {
+					textField_1.setText(""); 
+				    textField_2.setText("");
+					textField_3.setText("");
+					textField_4.setText("");
+					textField_5.setText("");
+					textArea.setText("");
+					searchPerson=pb.searchPerson(firstName);
+					if(searchPerson == null){
+						
+						JOptionPane.showMessageDialog(null,"Person not found.");
+					}
+					else {
+					
+					textField_1.setText(searchPerson.getLastName());
+					textArea.setText(searchPerson.getAddress());
+					textField_2.setText(searchPerson.getState());
+					textField_3.setText(searchPerson.getCity());
+					textField_4.setText(String.valueOf(searchPerson.getZip()));
+					textField_5.setText(String.valueOf(searchPerson.getPhoneNumber()));
+					}
+				}
+				
+			}
+		});
 		btnNewButton_1.setBounds(125, 364, 89, 23);
 		frame.getContentPane().add(btnNewButton_1);
 		
@@ -193,7 +256,7 @@ public class AddressBook {
 				pb.addPerson("Hardik2", "lastName2", "address", "city", "state", 284701, 12547707);
 				pb.addPerson("Hardik1", "lastName1", "address", "city", "state", 284701, 12547707);
 				pb.addPerson("hardik", "lastName3", "address", "city", "state", 184701, 12547707);*/
-				pb.readFile();
+				
 				textArea_1.setText(pb.getAllPerson());
 				
 		
@@ -224,6 +287,15 @@ public class AddressBook {
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Last Name", "Zip"}));
 		comboBox.setBounds(396, 40, 102, 22);
 		frame.getContentPane().add(comboBox);
+		
+		JButton btnNewButton_5 = new JButton("Save to file");
+		btnNewButton_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pb.writeFile();
+			}
+		});
+		btnNewButton_5.setBounds(125, 411, 89, 23);
+		frame.getContentPane().add(btnNewButton_5);
 		
 		
 	}

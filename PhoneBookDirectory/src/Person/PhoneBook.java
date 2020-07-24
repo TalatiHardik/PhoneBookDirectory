@@ -128,7 +128,7 @@ public class PhoneBook {
 
 		    PhoneBooklist = (Vector<PersonData>) readStream.readObject();
 		    readStream.close();
-		    System.out.println("File read"+PhoneBooklist.get(1));
+		   // System.out.println("File read"+PhoneBooklist.get(1));
 		}catch (Exception e) {
 		    e.printStackTrace();
 		}
@@ -163,9 +163,9 @@ public class PhoneBook {
 		pb.addPerson("Hardik", "lastName0", "address", "city", "state", 584701, 12547707);
 		pb.addPerson("Hardik2", "lastName2", "address", "city", "state", 284701, 12547707);
 		pb.addPerson("Hardik1", "lastName1", "address", "city", "state", 284701, 12547707);
-		pb.addPerson("hardik", "lastName0", "address", "city", "state", 184701, 12547707);
+		pb.addPerson("hardik", "lastName3", "address", "city", "state", 184701, 12547707);
 		System.out.println("Output:"+pb.getAllPerson());
-		
+		pb.writeFile();
 		pb.sortZip();
 		System.out.println("Output:"+pb.getAllPerson());
 		pb.updatePerson("Hardik", "Talati", "B-203", "surat", "Guj", 584701, 12547707);
