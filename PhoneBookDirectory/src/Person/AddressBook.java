@@ -6,8 +6,15 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
+import javax.swing.ListModel;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
+import javax.swing.JList;
+import java.awt.event.ActionListener;
+import java.util.*;
+import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class AddressBook {
 
@@ -18,6 +25,8 @@ public class AddressBook {
 	private JTextField textField_3;
 	private JTextField textField_4;
 	private JTextField textField_5;
+	private PhoneBook pb = new PhoneBook();
+	JComboBox comboBox;
 
 	/**
 	 * Launch the application.
@@ -129,5 +138,53 @@ public class AddressBook {
 		JButton btnNewButton_2 = new JButton("New button");
 		btnNewButton_2.setBounds(233, 364, 89, 23);
 		frame.getContentPane().add(btnNewButton_2);
+	
+		JTextArea textArea_1 = new JTextArea();
+		textArea_1.setEditable(false);
+		textArea_1.setBounds(396, 77, 138, 262);
+		frame.getContentPane().add(textArea_1);
+		
+		
+		
+		JButton btnNewButton_3 = new JButton("Print All");
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				pb.addPerson("Hardik", "lastName0", "address", "city", "state", 584701, 12547707);
+				pb.addPerson("Hardik2", "lastName2", "address", "city", "state", 284701, 12547707);
+				pb.addPerson("Hardik1", "lastName1", "address", "city", "state", 284701, 12547707);
+				pb.addPerson("hardik", "lastName3", "address", "city", "state", 184701, 12547707);
+				textArea_1.setText(pb.getAllPerson());
+				
+		
+			}
+		});
+		btnNewButton_3.setBounds(423, 364, 89, 23);
+		frame.getContentPane().add(btnNewButton_3);
+		
+		JButton btnNewButton_4 = new JButton("Sort By LastName");
+		btnNewButton_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(comboBox.getItemAt(comboBox.getSelectedIndex())=="Zip")
+				{
+					pb.sortZip();
+				}
+				else
+				{
+					pb.sortLastName();
+				}
+				textArea_1.setText(pb.getAllPerson());
+				
+			}
+		});
+		btnNewButton_4.setBounds(406, 411, 128, 23);
+		frame.getContentPane().add(btnNewButton_4);
+		
+		comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Last Name", "Zip"}));
+		comboBox.setBounds(396, 40, 102, 22);
+		frame.getContentPane().add(comboBox);
+		
+		
 	}
 }

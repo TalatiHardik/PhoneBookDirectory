@@ -52,10 +52,10 @@ class ZipCompare implements Comparator<PersonData>{
 
 public class PhoneBook {
 
-	LinkedList<PersonData> PhoneBooklist;
+	Vector<PersonData> PhoneBooklist;
 	public PhoneBook()
     {
-		PhoneBooklist = new LinkedList<>();
+		PhoneBooklist = new Vector<PersonData>();
     }
 	
 	public void addPerson(String firstName, String lastName,String address , String city , String state ,int zip,int phoneNumber) {
@@ -111,9 +111,11 @@ public class PhoneBook {
 	
 	public String getAllPerson() {
 		String data="";
+		//Vector<String> data = new Vector<>();
 		for (int i=0 ;i< PhoneBooklist.size();i++) {
 			PersonData person = PhoneBooklist.get(i);
 			data=data+(person.getFirstName())+"  "+(person.getLastName())+"\n";
+			//data.add((person.getFirstName())+"  "+(person.getLastName()));
 		}
 		return data;
 	}
@@ -123,7 +125,7 @@ public class PhoneBook {
 		    FileInputStream readData = new FileInputStream("peopledata.ser");
 		    ObjectInputStream readStream = new ObjectInputStream(readData);
 
-		    PhoneBooklist = (LinkedList<PersonData>) readStream.readObject();
+		    PhoneBooklist = (Vector<PersonData>) readStream.readObject();
 		    readStream.close();
 		    System.out.println("File read"+PhoneBooklist.get(1));
 		}catch (Exception e) {

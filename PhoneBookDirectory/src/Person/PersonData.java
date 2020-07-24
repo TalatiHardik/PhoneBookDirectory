@@ -73,7 +73,7 @@ public class PersonData implements Serializable {
 
 	   public String toString()
 	   {
-	      return  firstName + "\n" + lastName + "\n" + address + "\n" + city + "\n" + state + "\n" + zip + "\n" + phoneNumber;
+	      return  firstName + " " + lastName ;//+ "\n" + address + "\n" + city + "\n" + state + "\n" + zip + "\n" + phoneNumber;
 	   }
 
 }
