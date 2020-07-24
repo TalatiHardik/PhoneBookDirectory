@@ -158,10 +158,10 @@ public class AddressBook {
 			public void keyPressed(KeyEvent e) {
 				int key=e.getKeyCode();
 				if((key>=e.VK_0 && key<=e.VK_9) || (key>=e.VK_NUMPAD0 && key<=e.VK_NUMPAD9) || (key == KeyEvent.VK_BACK_SPACE)) {
-					textField_4.setEditable(true);
+					textField_5.setEditable(true);
 				}
 				else {
-					textField_4.setEditable(false);
+					textField_5.setEditable(false);
 				}
 			}
 		});
@@ -180,7 +180,7 @@ public class AddressBook {
 					String state = textField_2.getText();
 					String city = textField_3.getText();
 					int zip  = Integer.parseInt(textField_4.getText());
-					int phoneNumber =  Integer.parseInt(textField_5.getText());
+					int phoneNumber = Integer.parseInt(textField_5.getText());
 					int success=pb.addPerson(firstName, lastName, address, city, state, zip, phoneNumber);
 					if(success == 0){
 						JOptionPane.showMessageDialog(null,"Error Field not inserted person already exsist");
@@ -238,6 +238,30 @@ public class AddressBook {
 		frame.getContentPane().add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Update");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int check=validate();
+				if(check == 1) {
+					String firstName = textField.getText();
+					String lastName = textField_1.getText();
+					String address = textArea.getText();
+					String state = textField_2.getText();
+					String city = textField_3.getText();
+					int zip  = Integer.parseInt(textField_4.getText());
+					int phoneNumber =  Integer.parseInt(textField_5.getText());
+					int success=pb.updatePerson(firstName, lastName, address, city, state, zip, phoneNumber);
+					if(success == 0){
+						JOptionPane.showMessageDialog(null,"Error Field not updated person doesnt exsist");
+					}
+					else {
+						JOptionPane.showMessageDialog(null,"Updation Successfull");
+						textArea_1.setText(pb.getAllPerson());
+					}
+					
+				}
+				
+			}
+		});
 		btnNewButton_2.setBounds(233, 364, 89, 23);
 		frame.getContentPane().add(btnNewButton_2);
 	

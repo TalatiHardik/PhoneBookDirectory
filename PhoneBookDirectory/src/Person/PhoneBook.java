@@ -86,6 +86,23 @@ public class PhoneBook {
 		}
 		return searchPerson;
 	}
+	
+	public int removePerson(String firstName) {
+		PersonData searchPerson = this.searchPerson(firstName) ;
+		if(searchPerson != null)
+		{
+		if(PhoneBooklist.remove(searchPerson)) {
+			return 1;	
+		}
+		else {
+			return 0;
+		}
+		}
+		else {
+			return 0;
+		}
+		
+	}
 	public int updatePerson(String firstName, String lastName,String address , String city , String state ,int zip,int phoneNumber) {
 		int flag=0;
 		for (int i=0 ;i< PhoneBooklist.size();i++) {
