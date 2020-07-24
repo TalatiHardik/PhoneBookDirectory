@@ -355,6 +355,13 @@ public class AddressBook {
 				            	int check=pb.removePerson(firstName);
 				            	if(check == 1)
 				            		JOptionPane.showMessageDialog(null,"Person removed.");
+				            		textField.setText("");
+					            	textField_1.setText(""); 
+								    textField_2.setText("");
+									textField_3.setText("");
+									textField_4.setText("");
+									textField_5.setText("");
+									textArea.setText("");
 				            		textArea_1.setText(pb.getAllPerson());
 				           
 				            }else if (result == JOptionPane.NO_OPTION){
