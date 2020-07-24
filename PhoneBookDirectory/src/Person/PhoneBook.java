@@ -168,6 +168,7 @@ public class PhoneBook {
 		System.out.println("Output:"+s123);*/
 		pb.sortZip();
 		System.out.println("Output:"+pb.getAllPerson());
+		pb.updatePerson("Hardik", "Talati", "B-203", "surat", "Guj", 584701, 12547707);
 		pb.sortLastName();
 		System.out.println("Output:"+pb.getAllPerson());
 	}
