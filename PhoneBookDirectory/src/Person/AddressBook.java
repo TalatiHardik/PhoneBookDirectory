@@ -10,6 +10,8 @@ import javax.swing.ListModel;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
+
 import java.awt.event.ActionListener;
 import java.util.*;
 import java.awt.event.ActionEvent;
@@ -25,6 +27,8 @@ public class AddressBook {
 	private JTextField textField_3;
 	private JTextField textField_4;
 	private JTextField textField_5;
+	private JTextArea textArea_1;
+	private JTextArea textArea;
 	private PhoneBook pb = new PhoneBook();
 	JComboBox comboBox;
 
@@ -49,6 +53,16 @@ public class AddressBook {
 	 */
 	public AddressBook() {
 		initialize();
+	}
+	
+	public int validate() {
+		if((textField.getText().equals("")) || (textField_1.getText().equals(""))   || (textField_2.getText().equals(""))  || (textField_3.getText().equals(""))  || (textField_4.getText().equals(""))  || (textField_5.getText().equals(""))  || (textArea.getText().equals(""))   )
+		{
+			JOptionPane.showMessageDialog(null,"Please fill all details.");
+			return 0;
+		}
+		
+		return 1;
 	}
 
 	/**
@@ -84,7 +98,7 @@ public class AddressBook {
 		textField_1.setColumns(10);
 		
 		JLabel lblNewLabel_3 = new JLabel("City :");
-		lblNewLabel_3.setBounds(61, 178, 42, 14);
+		lblNewLabel_3.setBounds(61, 217, 42, 14);
 		frame.getContentPane().add(lblNewLabel_3);
 		
 		textField_2 = new JTextField();
@@ -96,12 +110,12 @@ public class AddressBook {
 		lblNewLabel_4.setBounds(46, 117, 57, 14);
 		frame.getContentPane().add(lblNewLabel_4);
 		
-		JTextArea textArea = new JTextArea();
+		textArea = new JTextArea();
 		textArea.setBounds(125, 112, 121, 52);
 		frame.getContentPane().add(textArea);
 		
 		JLabel lblNewLabel_5 = new JLabel("State :");
-		lblNewLabel_5.setBounds(55, 217, 48, 14);
+		lblNewLabel_5.setBounds(55, 178, 48, 14);
 		frame.getContentPane().add(lblNewLabel_5);
 		
 		textField_3 = new JTextField();
@@ -127,19 +141,44 @@ public class AddressBook {
 		frame.getContentPane().add(textField_5);
 		textField_5.setColumns(10);
 		
-		JButton btnNewButton = new JButton("New button");
+		JButton btnNewButton = new JButton("Add");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int check=validate();
+				if(check == 1) {
+					String firstName = textField.getText();
+					String lastName = textField_1.getText();
+					String address = textArea.getText();
+					String state = textField_2.getText();
+					String city = textField_3.getText();
+					int zip  = Integer.parseInt(textField_4.getText());
+					int phoneNumber =  Integer.parseInt(textField_5.getText());
+					int success=pb.addPerson(firstName, lastName, address, city, state, zip, phoneNumber);
+					if(success == 0){
+						JOptionPane.showMessageDialog(null,"Error Field not inserted");
+					}
+					else {
+						JOptionPane.showMessageDialog(null,"Insertion Successfull");
+						textArea_1.setText(pb.getAllPerson());
+					}
+					
+				}
+				
+				
+			}
+		});
 		btnNewButton.setBounds(10, 364, 89, 23);
 		frame.getContentPane().add(btnNewButton);
 		
-		JButton btnNewButton_1 = new JButton("New button");
+		JButton btnNewButton_1 = new JButton("Search");
 		btnNewButton_1.setBounds(125, 364, 89, 23);
 		frame.getContentPane().add(btnNewButton_1);
 		
-		JButton btnNewButton_2 = new JButton("New button");
+		JButton btnNewButton_2 = new JButton("Update");
 		btnNewButton_2.setBounds(233, 364, 89, 23);
 		frame.getContentPane().add(btnNewButton_2);
 	
-		JTextArea textArea_1 = new JTextArea();
+		textArea_1 = new JTextArea();
 		textArea_1.setEditable(false);
 		textArea_1.setBounds(396, 77, 138, 262);
 		frame.getContentPane().add(textArea_1);
@@ -149,11 +188,12 @@ public class AddressBook {
 		JButton btnNewButton_3 = new JButton("Print All");
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				/*
 				pb.addPerson("Hardik", "lastName0", "address", "city", "state", 584701, 12547707);
 				pb.addPerson("Hardik2", "lastName2", "address", "city", "state", 284701, 12547707);
 				pb.addPerson("Hardik1", "lastName1", "address", "city", "state", 284701, 12547707);
-				pb.addPerson("hardik", "lastName3", "address", "city", "state", 184701, 12547707);
+				pb.addPerson("hardik", "lastName3", "address", "city", "state", 184701, 12547707);*/
+				pb.readFile();
 				textArea_1.setText(pb.getAllPerson());
 				
 		

@@ -58,7 +58,7 @@ public class PhoneBook {
 		PhoneBooklist = new Vector<PersonData>();
     }
 	
-	public void addPerson(String firstName, String lastName,String address , String city , String state ,int zip,int phoneNumber) {
+	public int addPerson(String firstName, String lastName,String address , String city , String state ,int zip,int phoneNumber) {
 		int flag=0;
 		for (int i=0 ;i< PhoneBooklist.size();i++) {
 			PersonData person = PhoneBooklist.get(i);
@@ -70,8 +70,9 @@ public class PhoneBook {
 		if(flag == 0) {
 			PersonData newPerson = new PersonData(firstName, lastName,address , city , state ,zip,phoneNumber);
 			PhoneBooklist.add(newPerson);
-			
+			return 1;
 		}
+		return 0;
 	}
 
 	public PersonData searchPerson(String firstName) {
