@@ -19,6 +19,9 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
 public class AddressBook {
 
@@ -74,13 +77,13 @@ public class AddressBook {
 		pb.readFile("");
 		
 		frame = new JFrame();
-		frame.setBounds(100, 100, 626, 546);
+		frame.setBounds(0, 0, 626, 546);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("AddressBook");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		lblNewLabel.setBounds(249, 11, 102, 14);
+		lblNewLabel.setBounds(236, 11, 102, 14);
 		frame.getContentPane().add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("FirstName :");
@@ -376,6 +379,39 @@ public class AddressBook {
 		});
 		btnNewButton_6.setBounds(181, 398, 89, 23);
 		frame.getContentPane().add(btnNewButton_6);
+		
+		JMenuBar menuBar = new JMenuBar();
+		menuBar.setBounds(16, 0, 87, 22);
+		frame.getContentPane().add(menuBar);
+		
+		JMenu mnNewMenu = new JMenu("File Menu");
+		menuBar.add(mnNewMenu);
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("Open");
+		mnNewMenu.add(mntmNewMenuItem);
+		
+		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Save");
+		mntmNewMenuItem_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pb.writeFile("");
+				JOptionPane.showMessageDialog(null,"Your Data has been stored in file.");
+			}
+		});
+		mnNewMenu.add(mntmNewMenuItem_1);
+		
+		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Quit");
+		mntmNewMenuItem_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int result = JOptionPane.showConfirmDialog(frame,"Are you sure , you want to quit?", "Close Program",
+			               JOptionPane.YES_NO_OPTION,
+			               JOptionPane.QUESTION_MESSAGE);
+			            if(result == JOptionPane.YES_OPTION){
+			            	System.exit(0);
+			            }
+				
+			}
+		});
+		mnNewMenu.add(mntmNewMenuItem_2);
 		
 		
 	}
