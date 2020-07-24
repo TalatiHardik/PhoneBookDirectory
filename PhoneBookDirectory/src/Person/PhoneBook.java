@@ -3,6 +3,42 @@ package Person;
 import java.io.*;
 import java.util.*;
 
+
+class fCompare implements Comparator<PersonData>{
+	 
+    @Override
+    public int compare(PersonData e1, PersonData e2) {
+        if(e1.getZip() < e2.getZip()){
+            return 1;
+        } else {
+            return -1;
+        }
+    }
+}
+
+class ZipCompare implements Comparator<PersonData>{
+	 
+    @Override
+    public int compare(PersonData e1, PersonData e2) {
+    	if(e1.getZip() == e2.getZip()) {
+    		if(e1.getFirstName().compareToIgnoreCase(e2.getFirstName()) > 0)
+    		{
+    			return 1;
+    		}
+    		else
+    		{
+    			return -1;
+    		}
+    		
+    	}
+    	else if(e1.getZip() < e2.getZip()){
+            return 1;
+        } else {
+            return -1;
+        }
+    }
+}
+
 public class PhoneBook {
 
 	LinkedList<PersonData> PhoneBooklist;
