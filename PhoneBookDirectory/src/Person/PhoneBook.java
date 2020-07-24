@@ -38,6 +38,29 @@ public class PhoneBook {
 		}
 		return searchPerson;
 	}
+	public int updatePerson(String firstName, String lastName,String address , String city , String state ,int zip,int phoneNumber) {
+		int flag=0;
+		for (int i=0 ;i< PhoneBooklist.size();i++) {
+			PersonData person = PhoneBooklist.get(i);
+			if(person.getFirstName().equals(firstName)) {
+				
+				person.setLastName(lastName);
+				person.setAddress(address);
+				person.setCity(city);
+				person.setState(state);
+				person.setZip(zip);
+				person.setPhoneNumber(phoneNumber);
+				flag=1;
+				break;
+			}
+		}
+		
+		if(flag == 0) {
+			
+			return 0;
+		}
+		return 1;
+	}
 	
 	public String getAllPerson() {
 		String data="";
