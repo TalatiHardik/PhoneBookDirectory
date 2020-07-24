@@ -4,11 +4,22 @@ import java.io.*;
 import java.util.*;
 
 
-class fCompare implements Comparator<PersonData>{
+class lastNameCompare implements Comparator<PersonData>{
 	 
     @Override
     public int compare(PersonData e1, PersonData e2) {
-        if(e1.getZip() < e2.getZip()){
+    	if(e1.getLastName().compareToIgnoreCase(e2.getLastName()) == 0) {
+    		if(e1.getFirstName().compareToIgnoreCase(e2.getFirstName()) > 0)
+    		{
+    			return 1;
+    		}
+    		else
+    		{
+    			return -1;
+    		}
+    		
+    	}
+    	else if(e1.getLastName().compareToIgnoreCase(e2.getLastName()) > 0){
             return 1;
         } else {
             return -1;
@@ -32,9 +43,9 @@ class ZipCompare implements Comparator<PersonData>{
     		
     	}
     	else if(e1.getZip() < e2.getZip()){
-            return 1;
-        } else {
             return -1;
+        } else {
+            return 1;
         }
     }
 }
@@ -133,16 +144,32 @@ public class PhoneBook {
 		    e.printStackTrace();
 		}
 	}
+	
+	public void sortZip() {
+		
+		Collections.sort(PhoneBooklist, new ZipCompare()); 
+	}
+	
+	public void sortLastName() {
+		
+		Collections.sort(PhoneBooklist, new lastNameCompare()); 
+	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		PhoneBook pb = new PhoneBook();
-		pb.addPerson("Hardik", "lastName", "address", "city", "state", 984701, 12547707);
-		pb.addPerson("Hardik21", "lastName", "address", "city", "state", 984701, 12547707);
+		pb.addPerson("Hardik", "lastName0", "address", "city", "state", 584701, 12547707);
+		pb.addPerson("Hardik2", "lastName2", "address", "city", "state", 284701, 12547707);
+		pb.addPerson("Hardik1", "lastName1", "address", "city", "state", 284701, 12547707);
+		pb.addPerson("hardik", "lastName0", "address", "city", "state", 184701, 12547707);
 		System.out.println("Output:"+pb.getAllPerson());
 		/*String abc="Hardik1";
 		PersonData s123 = null;
 		s123=pb.searchPerson(abc);	
 		System.out.println("Output:"+s123);*/
+		pb.sortZip();
+		System.out.println("Output:"+pb.getAllPerson());
+		pb.sortLastName();
+		System.out.println("Output:"+pb.getAllPerson());
 	}
 
 }
