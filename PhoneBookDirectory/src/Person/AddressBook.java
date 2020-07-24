@@ -7,6 +7,8 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.ListModel;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
 import javax.swing.JList;
@@ -16,9 +18,12 @@ import java.awt.event.ActionListener;
 import java.util.*;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.File;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -35,7 +40,8 @@ public class AddressBook {
 	private JTextArea textArea_1;
 	private JTextArea textArea;
 	private PhoneBook pb = new PhoneBook();
-	JComboBox comboBox;
+	private JComboBox comboBox;
+	private File fi = null;
 
 	/**
 	 * Launch the application.
@@ -74,7 +80,7 @@ public class AddressBook {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		pb.readFile("");
+		//pb.readFile(fi);
 		
 		frame = new JFrame();
 		frame.setBounds(0, 0, 626, 546);
@@ -175,6 +181,7 @@ public class AddressBook {
 		JButton btnNewButton = new JButton("Add");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(fi != null) {
 				int check=validate();
 				if(check == 1) {
 					String firstName = textField.getText();
@@ -197,6 +204,10 @@ public class AddressBook {
 				
 				
 			}
+			else {
+				JOptionPane.showMessageDialog(null,"Load file first");
+			}
+		 }
 		});
 		btnNewButton.setBounds(10, 364, 89, 23);
 		frame.getContentPane().add(btnNewButton);
@@ -318,8 +329,13 @@ public class AddressBook {
 		JButton btnNewButton_5 = new JButton("Save to file");
 		btnNewButton_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				pb.writeFile("");
+				if(fi != null) {
+				pb.writeFile(fi);
 				JOptionPane.showMessageDialog(null,"Data stored in file.");
+				}
+				else {
+					JOptionPane.showMessageDialog(null,"Load file first");
+				}
 			}
 		});
 		btnNewButton_5.setBounds(96, 432, 89, 23);
@@ -388,13 +404,32 @@ public class AddressBook {
 		menuBar.add(mnNewMenu);
 		
 		JMenuItem mntmNewMenuItem = new JMenuItem("Open");
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser fs = new JFileChooser();
+				FileFilter filter = new FileNameExtensionFilter("Ser is serializable class", "ser");
+				fs.setDialogTitle("Open File");
+				fs.setFileFilter(filter);
+				fs.setAcceptAllFileFilterUsed(false);
+				int result = fs.showOpenDialog(null);
+				if(result == JFileChooser.APPROVE_OPTION) {
+					fi = fs.getSelectedFile();
+					pb.readFile(fi);
+				}
+			}
+		});
 		mnNewMenu.add(mntmNewMenuItem);
 		
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Save");
 		mntmNewMenuItem_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				pb.writeFile("");
-				JOptionPane.showMessageDialog(null,"Your Data has been stored in file.");
+				if(fi != null) {
+					pb.writeFile(fi);
+					JOptionPane.showMessageDialog(null,"Your Data has been stored in file.");
+				}
+				else {
+					JOptionPane.showMessageDialog(null,"Load file first");
+				}
 			}
 		});
 		mnNewMenu.add(mntmNewMenuItem_1);

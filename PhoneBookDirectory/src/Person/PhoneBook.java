@@ -138,9 +138,8 @@ public class PhoneBook {
 		return data;
 	}
 	
-	public void readFile(String file) {
+	public void readFile(File file) {
 		try{
-			file="peopledata.ser";
 		    FileInputStream readData = new FileInputStream(file);
 		    ObjectInputStream readStream = new ObjectInputStream(readData);
 
@@ -152,9 +151,9 @@ public class PhoneBook {
 		}
 	}
 	
-	public void writeFile(String file) {
+	public void writeFile(File file) {
 		try{
-			file="peopledata.ser";
+		
 		    FileOutputStream writeData = new FileOutputStream(file);
 		    ObjectOutputStream writeStream = new ObjectOutputStream(writeData);
 	
