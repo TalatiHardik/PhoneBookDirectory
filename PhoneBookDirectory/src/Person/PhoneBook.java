@@ -162,15 +162,17 @@ public class PhoneBook {
 		pb.addPerson("Hardik1", "lastName1", "address", "city", "state", 284701, 12547707);
 		pb.addPerson("hardik", "lastName0", "address", "city", "state", 184701, 12547707);
 		System.out.println("Output:"+pb.getAllPerson());
-		/*String abc="Hardik1";
-		PersonData s123 = null;
-		s123=pb.searchPerson(abc);	
-		System.out.println("Output:"+s123);*/
+		
 		pb.sortZip();
 		System.out.println("Output:"+pb.getAllPerson());
 		pb.updatePerson("Hardik", "Talati", "B-203", "surat", "Guj", 584701, 12547707);
 		pb.sortLastName();
 		System.out.println("Output:"+pb.getAllPerson());
+		/*
+		String abc="Hardik";
+		PersonData s123 = null;
+		s123=pb.searchPerson(abc);	
+		System.out.println("Output:"+s123);*/
 	}
 
 }
