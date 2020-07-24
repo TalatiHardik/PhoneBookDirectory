@@ -71,7 +71,7 @@ public class AddressBook {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		pb.readFile();
+		pb.readFile("");
 		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 626, 546);
@@ -315,7 +315,7 @@ public class AddressBook {
 		JButton btnNewButton_5 = new JButton("Save to file");
 		btnNewButton_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				pb.writeFile();
+				pb.writeFile("");
 				JOptionPane.showMessageDialog(null,"Data stored in file.");
 			}
 		});

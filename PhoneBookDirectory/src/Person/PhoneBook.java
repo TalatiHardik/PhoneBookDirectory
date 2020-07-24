@@ -138,9 +138,10 @@ public class PhoneBook {
 		return data;
 	}
 	
-	public void readFile() {
+	public void readFile(String file) {
 		try{
-		    FileInputStream readData = new FileInputStream("peopledata.ser");
+			file="peopledata.ser";
+		    FileInputStream readData = new FileInputStream(file);
 		    ObjectInputStream readStream = new ObjectInputStream(readData);
 
 		    PhoneBooklist = (Vector<PersonData>) readStream.readObject();
@@ -151,9 +152,10 @@ public class PhoneBook {
 		}
 	}
 	
-	public void writeFile() {
+	public void writeFile(String file) {
 		try{
-		    FileOutputStream writeData = new FileOutputStream("peopledata.ser");
+			file="peopledata.ser";
+		    FileOutputStream writeData = new FileOutputStream(file);
 		    ObjectOutputStream writeStream = new ObjectOutputStream(writeData);
 	
 		    writeStream.writeObject(PhoneBooklist);
@@ -182,7 +184,7 @@ public class PhoneBook {
 		pb.addPerson("Hardik1", "lastName1", "address", "city", "state", 284701, 12547707);
 		pb.addPerson("hardik", "lastName3", "address", "city", "state", 184701, 12547707);
 		System.out.println("Output:"+pb.getAllPerson());
-		pb.writeFile();
+		//pb.writeFile();
 		pb.sortZip();
 		System.out.println("Output:"+pb.getAllPerson());
 		pb.updatePerson("Hardik", "Talati", "B-203", "surat", "Guj", 584701, 12547707);
