@@ -289,7 +289,7 @@ public class AddressBook {
 		btnNewButton_3.setBounds(423, 364, 89, 23);
 		frame.getContentPane().add(btnNewButton_3);
 		
-		JButton btnNewButton_4 = new JButton("Sort By LastName");
+		JButton btnNewButton_4 = new JButton("Sort");
 		btnNewButton_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(comboBox.getItemAt(comboBox.getSelectedIndex())=="Zip")
@@ -304,12 +304,12 @@ public class AddressBook {
 				
 			}
 		});
-		btnNewButton_4.setBounds(406, 411, 128, 23);
+		btnNewButton_4.setBounds(290, 44, 89, 23);
 		frame.getContentPane().add(btnNewButton_4);
 		
 		comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Last Name", "Zip"}));
-		comboBox.setBounds(396, 40, 102, 22);
+		comboBox.setBounds(410, 44, 102, 22);
 		frame.getContentPane().add(comboBox);
 		
 		JButton btnNewButton_5 = new JButton("Save to file");
