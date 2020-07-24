@@ -234,7 +234,7 @@ public class AddressBook {
 				
 			}
 		});
-		btnNewButton_1.setBounds(125, 364, 89, 23);
+		btnNewButton_1.setBounds(181, 364, 89, 23);
 		frame.getContentPane().add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Update");
@@ -262,7 +262,7 @@ public class AddressBook {
 				
 			}
 		});
-		btnNewButton_2.setBounds(233, 364, 89, 23);
+		btnNewButton_2.setBounds(10, 398, 89, 23);
 		frame.getContentPane().add(btnNewButton_2);
 	
 		textArea_1 = new JTextArea();
@@ -316,10 +316,59 @@ public class AddressBook {
 		btnNewButton_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				pb.writeFile();
+				JOptionPane.showMessageDialog(null,"Data stored in file.");
 			}
 		});
-		btnNewButton_5.setBounds(125, 411, 89, 23);
+		btnNewButton_5.setBounds(96, 432, 89, 23);
 		frame.getContentPane().add(btnNewButton_5);
+		
+		JButton btnNewButton_6 = new JButton("Delete");
+		btnNewButton_6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String firstName=textField.getText();
+				PersonData searchPerson = null;
+				
+				if(textField.getText().equals(""))
+				{
+					JOptionPane.showMessageDialog(null,"Please enter name to delete.");
+				
+				}
+				else {
+					
+					searchPerson=pb.searchPerson(firstName);
+					if(searchPerson == null){
+						
+						JOptionPane.showMessageDialog(null,"Person not found.");
+					}
+					else {
+					
+					textField_1.setText(searchPerson.getLastName());
+					textArea.setText(searchPerson.getAddress());
+					textField_2.setText(searchPerson.getState());
+					textField_3.setText(searchPerson.getCity());
+					textField_4.setText(String.valueOf(searchPerson.getZip()));
+					textField_5.setText(String.valueOf(searchPerson.getPhoneNumber()));
+					int result = JOptionPane.showConfirmDialog(frame,"Sure? You want to remove the person?", "Delete person",
+				               JOptionPane.YES_NO_OPTION,
+				               JOptionPane.QUESTION_MESSAGE);
+				            if(result == JOptionPane.YES_OPTION){
+				            	int check=pb.removePerson(firstName);
+				            	if(check == 1)
+				            		JOptionPane.showMessageDialog(null,"Person removed.");
+				            		textArea_1.setText(pb.getAllPerson());
+				           
+				            }else if (result == JOptionPane.NO_OPTION){
+				          
+				            }else {
+				            	JOptionPane.showMessageDialog(null,"Person did not removed choose one option.");
+				            }
+					}
+				}
+				
+			}
+		});
+		btnNewButton_6.setBounds(181, 398, 89, 23);
+		frame.getContentPane().add(btnNewButton_6);
 		
 		
 	}
