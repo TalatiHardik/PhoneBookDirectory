@@ -132,9 +132,11 @@ public class PhoneBook {
 		//Vector<String> data = new Vector<>();
 		for (int i=0 ;i< PhoneBooklist.size();i++) {
 			PersonData person = PhoneBooklist.get(i);
-			data=data+(person.getFirstName())+"  "+(person.getLastName())+"\n";
+			//data=data+(person.getFirstName())+"  "+(person.getLastName())+"\n";
+			data=data+"First Name: "+(person.getFirstName())+"\nLast Name: "+(person.getLastName())+"\nZip: "+(person.getZip())+"\n\n";
 			//data.add((person.getFirstName())+"  "+(person.getLastName()));
 		}
+		
 		return data;
 	}
 	
@@ -167,7 +169,7 @@ public class PhoneBook {
 	}
 	
 	public void sortZip() {
-		
+
 		Collections.sort(PhoneBooklist, new ZipCompare()); 
 	}
 	

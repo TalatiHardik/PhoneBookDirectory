@@ -1,5 +1,6 @@
 package Person;
 
+import java.awt.Dimension;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -13,6 +14,7 @@ import javax.swing.JTextArea;
 import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 
 import java.awt.event.ActionListener;
 import java.util.*;
@@ -40,8 +42,10 @@ public class AddressBook {
 	private JTextArea textArea_1;
 	private JTextArea textArea;
 	private PhoneBook pb = new PhoneBook();
+	private PhoneBook pb1 = new PhoneBook();
 	private JComboBox comboBox;
 	private File fi = null;
+	JScrollPane scroll;
 
 	/**
 	 * Launch the application.
@@ -279,10 +283,14 @@ public class AddressBook {
 		btnNewButton_2.setBounds(10, 398, 89, 23);
 		frame.getContentPane().add(btnNewButton_2);
 	
-		textArea_1 = new JTextArea();
+		textArea_1 = new JTextArea(10,20);
 		textArea_1.setEditable(false);
-		textArea_1.setBounds(396, 77, 138, 262);
+		textArea_1.setBounds(396, 77, 138, 344);
+		//scroll = new JScrollPane(textArea , JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		//scroll.setPreferredSize(new Dimension(300, 50));
+		//scroll.setBounds(396, 77, 138, 262);
 		frame.getContentPane().add(textArea_1);
+		//frame.getContentPane().add(scroll);
 		
 		
 		
@@ -300,7 +308,7 @@ public class AddressBook {
 		
 			}
 		});
-		btnNewButton_3.setBounds(423, 364, 89, 23);
+		btnNewButton_3.setBounds(423, 432, 89, 23);
 		frame.getContentPane().add(btnNewButton_3);
 		
 		JButton btnNewButton_4 = new JButton("Sort");
@@ -327,6 +335,7 @@ public class AddressBook {
 		frame.getContentPane().add(comboBox);
 		
 		JButton btnNewButton_5 = new JButton("Save to file");
+		btnNewButton_5.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		btnNewButton_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(fi != null) {
@@ -415,6 +424,7 @@ public class AddressBook {
 				if(result == JFileChooser.APPROVE_OPTION) {
 					fi = fs.getSelectedFile();
 					pb.readFile(fi);
+					JOptionPane.showMessageDialog(null,"File has been loaded.");
 				}
 			}
 		});
